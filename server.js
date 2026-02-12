@@ -1,5 +1,4 @@
 const express = require("express");
-const mysql = require("mysql2");
 const cors = require("cors");
 
 const app = express();
@@ -13,22 +12,8 @@ const path = require("path");
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/images", express.static(path.join(__dirname, "images")));
 
-// Connexion à MariaDB
-const db = mysql.createConnection({
-  host: "127.0.0.1",   // plus sûr que "localhost"
-  user: "root",        // ou val_user si créé
-  password: "passer",  // mets ton vrai mot de passe
-  database: "valentine_db"
-});
-
-// Tester la connexion
-db.connect((err) => {
-  if (err) {
-    console.error("Erreur connexion DB :", err);
-  } else {
-    console.log("Connecté à MariaDB");
-  }
-});
+// Database connection removed — not needed for this project.
+// (Previously used mysql2 / MariaDB; DB code was removed per request.)
 
 // Route racine -> page de login
 app.get("/", (req, res) => {
@@ -46,16 +31,7 @@ app.get("/gallery", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "gallery.html"));
 });
 
-// Route récupérer messages (si table créée)
-app.get("/messages", (req, res) => {
-  db.query("SELECT * FROM messages", (err, results) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).json({ error: "Erreur base de données" });
-    }
-    res.json(results);
-  });
-});
+// /messages route removed because the app no longer uses a database.
 
 app.listen(5000, () => {
   console.log("Serveur lancé sur http://localhost:5000");
