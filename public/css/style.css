@@ -1,0 +1,74 @@
+:root{--pink-1:#FF69B4;--pink-2:#FD6C9E;--green-1:#C8FFD5;--green-2:#DFFFEF;--cream:#FFF6EA;--accent:#F28AB2}
+*{box-sizing:border-box;font-family:Inter,Arial,Helvetica,sans-serif}
+body,html{height:100%;margin:0;background:linear-gradient(90deg,var(--pink-2),var(--green-1));color:#fff;padding:10px 14px;min-height:100vh}
+.center{display:flex;align-items:center;justify-content:center}
+.split{display:flex;height:calc(100vh - 20px);border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.08);overflow:hidden}
+
+.left{flex:1;background:transparent;display:flex;align-items:center;justify-content:center;color:#fff}
+.right{flex:1;background:transparent;display:flex;align-items:center;justify-content:center;color:#fff}
+.pw-form{background:linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,255,240,0.88));padding:20px;border-radius:12px;border:2px solid rgba(255,105,180,0.12);box-shadow:0 6px 24px rgba(200,160,180,0.08)}
+.pw-form label{color:#000;font-weight:600}
+.pw-form input{padding:10px;margin:10px 0;display:block;width:220px;border:1px solid rgba(0,0,0,0.06);border-radius:6px}
+.pw-form button{padding:10px 14px;background:linear-gradient(90deg,var(--pink-2),var(--green-1));border:none;color:#fff;border-radius:8px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.08)}
+.pw-form button:hover{filter:brightness(1.02)}
+.msg{color:#801336;margin-top:10px}
+/* Ask page */
+.ask-page{height:100vh;flex-direction:column}
+.buttons{margin-top:20px}
+.buttons button{padding:10px 18px;margin:0 8px;font-size:16px;border-radius:8px;border:2px solid rgba(0,0,0,0.04);cursor:pointer}
+.buttons .yes{background:linear-gradient(90deg,var(--green-1),#9ef0c7);color:#044}
+.buttons .no{background:linear-gradient(90deg,var(--pink-2),#ffb1d0);color:#450}
+.no{position:relative} 
+/* Gallery */
+.gallery-container{display:flex;min-height:100vh}
+.photo-section{flex:1;display:flex;align-items:center;justify-content:center;padding:40px}
+.photo-frame{border:4px solid #ccc;padding:10px;width:80%;max-width:900px;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;background:#fff;overflow:hidden;position:relative;border-radius:10px}
+.photo-frame img{position:relative;z-index:1;width:100%;height:100%;display:block;opacity:1;transition:opacity .6s ease, transform .8s ease;object-fit:cover;object-position:center;background:#fff;box-shadow:0 8px 30px rgba(0,0,0,0.08), inset 0 0 0 12px rgba(255,255,255,0.06);border-radius:6px}
+
+/* Mirror reflection placed behind the image as background */
+.photo-frame::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image: var(--reflection);
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+  transform: scaleY(-1) scale(1.06);
+  opacity:0.3;
+  filter: blur(8px) saturate(0.9) brightness(0.85) contrast(0.95) hue-rotate(-6deg);
+  transition:opacity .6s ease, transform .8s ease, filter .6s ease;
+  z-index:0;
+  pointer-events:none;
+}
+
+/* Subtle vignette overlay to emphasize the framed image */
+.photo-frame::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  box-shadow: inset 0 0 80px rgba(0,0,0,0.06);
+  border-radius:10px;
+  pointer-events:none;
+  z-index:2;
+}
+
+/* Mirror reacts to transition classes applied on the frame (subtle variants) */
+.photo-frame.fade-out::before{opacity:0;transform:scaleY(-1) scale(1)}
+.photo-frame.fade-in::before{opacity:0.35;transform:scaleY(-1) scale(1)}
+
+.photo-frame.zoom-out::before{opacity:0;transform:scaleY(-1) scale(1.08)}
+.photo-frame.zoom-in::before{opacity:0.35;transform:scaleY(-1) scale(1)}
+
+.photo-frame.slide-left-out::before{opacity:0;transform:translateX(-15%) scaleY(-1) scale(1.02)}
+.photo-frame.slide-left-in::before{opacity:0.35;transform:translateX(0) scaleY(-1) scale(1)}
+
+.photo-frame.slide-right-out::before{opacity:0;transform:translateX(15%) scaleY(-1) scale(1.02)}
+.photo-frame.slide-right-in::before{opacity:0.35;transform:translateX(0) scaleY(-1) scale(1)}
+
+.poem-section{width:40%;padding:40px;border-left:4px solid #eee}
+.poem-section h2{margin-top:0}
+.poem-text{white-space:pre-wrap;line-height:1.6;font-size:1.05rem;font-style:italic;color:#333;margin-top:12px}
+.poem-text p{margin:0 0 12px 0}
+/* small screens */
+@media(max-width:800px){.poem-section{display:none}.gallery-container{flex-direction:column}.photo-section{padding:20px}}
