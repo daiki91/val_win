@@ -1,0 +1,30 @@
+# Node modules
+node_modules/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Env files
+.env
+
+# VSCode
+.vscode/
+
+# Build outputs
+dist/
+build/
+
+# Systèmes temporaires
+*.tmp
+*.swp
+*.swo
+
+# Autres fichiers à ignorer
+.idea/
+*.log

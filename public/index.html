@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body class="split login-bg">
+  <button onclick="window.history.back()" style="position:fixed;top:16px;left:16px;z-index:1000;background:#fff0f6;color:#801336;padding:8px 16px;border-radius:8px;border:none;font-weight:bold;box-shadow:0 2px 8px rgba(0,0,0,0.08);cursor:pointer;">Retour</button>
   <div class="left">
     <h1>Pour toi 💖</h1>
   </div>
@@ -17,7 +18,102 @@
       <button type="submit" class="pink-btn">Entrer</button>
     </form>
     <p id="msg" class="msg"></p>
+
+    <div class="center" style="margin-top:24px;flex-direction:column;gap:12px;">
+      <button id="poemBtn" class="pink-btn">Poème</button>
+      <button id="surpriseBtn" class="pink-btn">Surprise</button>
+    </div>
+    <div id="poemSection" style="display:none;margin-top:18px;background:#fff0f6;color:#801336;padding:18px;border-radius:10px;max-width:420px;">
+      <h3>Poème pour toi</h3>
+      <p style="font-style:italic;">Dans le jardin de mon cœur,<br>Tu es la plus belle fleur.<br>Chaque jour, je t'aime davantage,<br>Mon amour, mon doux mirage.</p>
+    </div>
+    <div id="surpriseSection" style="display:none;margin-top:18px;background:#ffe4e1;color:#801336;padding:18px;border-radius:10px;max-width:420px;">
+      <h3>Un message romantique</h3>
+      <p>Tu es la lumière de ma vie, mon bonheur quotidien. Je t'aime plus que tout !</p>
+      <div style="display:flex;justify-content:center;align-items:center;margin-top:16px;">
+        <div class="mini-tree" style="position:relative;width:120px;height:140px;">
+          <div class="mini-trunk" style="width:18px;height:50px;background:#8b4513;position:absolute;bottom:0;left:50%;transform:translateX(-50%);border-radius:6px;"></div>
+          <div class="mini-heart-leaf" style="position:absolute;top:10px;left:50%;transform:translateX(-50%);width:100px;height:100px;background:red;clip-path:polygon(50% 90%,0 40%,20% 10%,50% 30%,80% 10%,100% 40%);"></div>
+          <div class="mini-leaves">
+            <img src="/images/1.jpeg" style="position:absolute;top:20px;left:10px;width:32px;height:32px;border-radius:50%;object-fit:cover;">
+            <img src="/images/2.jpeg" style="position:absolute;top:30px;right:10px;width:32px;height:32px;border-radius:50%;object-fit:cover;">
+            <img src="/images/3.jpeg" style="position:absolute;top:60px;left:30px;width:28px;height:28px;border-radius:50%;object-fit:cover;">
+            <img src="/images/4.jpeg" style="position:absolute;top:60px;right:30px;width:28px;height:28px;border-radius:50%;object-fit:cover;">
+          </div>
+        </div>
+      </div>
+      <div class="counter" style="margin-top:16px;font-size:16px;font-weight:bold;">
+        Notre amour dure depuis...<br>
+        <span id="timerSurprise"></span>
+      </div>
+      <div id="surpriseHearts"></div>
+    </div>
   </div>
   <script src="/js/login.js"></script>
+  <script>
+// DATE DE DÉBUT (MODIFIE ICI)
+const startDate = new Date("2025-02-24T00:00:00");
+
+// Poème
+const poemBtn = document.getElementById("poemBtn");
+const poemSection = document.getElementById("poemSection");
+poemBtn.addEventListener("click",()=>{
+  poemSection.style.display = poemSection.style.display === "none" ? "block" : "none";
+});
+
+// Surprise
+const surpriseBtn = document.getElementById("surpriseBtn");
+const surpriseSection = document.getElementById("surpriseSection");
+let surpriseTimerInterval = null;
+let surpriseHeartsInterval = null;
+surpriseBtn.addEventListener("click",()=>{
+  if(surpriseSection.style.display === "none"){
+    surpriseSection.style.display = "block";
+    // Compteur
+    function updateSurpriseTimer(){
+      const now = new Date();
+      const diff = now - startDate;
+      const days = Math.floor(diff / (1000*60*60*24));
+      const hours = Math.floor((diff / (1000*60*60)) % 24);
+      const minutes = Math.floor((diff / (1000*60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+      document.getElementById("timerSurprise").innerHTML =
+        days + " jours " +
+        hours + " heures " +
+        minutes + " minutes " +
+        seconds + " secondes";
+    }
+    updateSurpriseTimer();
+    surpriseTimerInterval = setInterval(updateSurpriseTimer,1000);
+    // Cœurs animés
+    const surpriseHearts = document.getElementById("surpriseHearts");
+    surpriseHeartsInterval = setInterval(()=>{
+      const heart = document.createElement("div");
+      heart.textContent = "❤";
+      heart.style.position = "absolute";
+      heart.style.left = Math.random()*80+"%";
+      heart.style.top = Math.random()*60+"%";
+      heart.style.fontSize = (Math.random()*16+16)+"px";
+      heart.style.opacity = 0.8;
+      heart.style.transition = "opacity 2s";
+      surpriseHearts.appendChild(heart);
+      setTimeout(()=>{heart.style.opacity=0;},1500);
+      setTimeout(()=>{heart.remove();},2000);
+    },400);
+  }else{
+    surpriseSection.style.display = "none";
+    if(surpriseTimerInterval) clearInterval(surpriseTimerInterval);
+    if(surpriseHeartsInterval) clearInterval(surpriseHeartsInterval);
+    document.getElementById("surpriseHearts").innerHTML = "";
+  }
+});
+
+// Compteur principal (optionnel, à ajouter si besoin ailleurs)
+// function updateMainTimer(){
+//   ...
+// }
+// setInterval(updateMainTimer,1000);
+
+  </script>
 </body>
 </html>

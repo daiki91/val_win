@@ -7,37 +7,111 @@
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-  <div class="gallery-container">
-    <section class="photo-section">
-      <div class="photo-frame">
-        <img id="carousel" src="/images/1.jpeg" alt="photo" />
-      </div>
-    </section>
-    <aside class="poem-section">
-      <h2>Poème</h2>
-      <div id="poem" class="poem-text">
-        <p>Winnie, ma princesse au rire étincelant,
-        Toujours joueuse, légère comme le vent,
-        Tu transformes l’instant en éclats de lumière,
+  <!-- Poème en haut de page -->
+  <div id="poem-banner" style="position:fixed;top:0;left:0;width:100vw;z-index:3000;background:rgba(0,0,0,0.28);padding:32px 0 18px 0;text-align:center;">
+    <div style="color:#fff;font-size:1.35em;font-family:'Brush Script MT',cursive;max-width:900px;margin:0 auto;line-height:1.5;text-shadow:0 2px 12px #0008;">
+      Winnie, ma princesse au rire étincelant,<br>
+      Toujours joueuse, légère comme le vent,<br>
+      Tu transformes l’instant en éclats de lumière,<br>
+      Et mon monde s’illumine dès que tu ris, sincère.<br><br>
+      Ton sourire, miracle aux reflets dorés,<br>
+      Pourrait réveiller les cœurs les plus brisés ;<br>
+      Il porte une chaleur plus forte que l’oubli,<br>
+      Comme un soleil levant après la nuit.<br><br>
+      Ton regard, profond comme un océan paisible,<br>
+      Devant lui, mentir serait impossible ;<br>
+      Il rassure, enveloppe d’une douceur rare,<br>
+      Et apaise l’âme quand elle s’égare.<br><br>
+      Et moi, soldat pourtant solide et assuré,<br>
+      Je vacille dès que tu viens me troubler ;<br>
+      Ta grâce me guide, m’emporte et me surprend,<br>
+      Car ton amour est ma force… et mon serment.
+    </div>
+  </div>
+  <nav style="width:100%;background:#fff0f6;color:#801336;padding:12px 0;display:flex;justify-content:center;gap:24px;position:sticky;top:0;z-index:1001;box-shadow:0 2px 8px rgba(0,0,0,0.04);margin-top:120px;">
+    <button id="poemNavBtn" class="pink-btn">Poème</button>
+    <button id="surpriseNavBtn" class="pink-btn">Surprise</button>
+    <button onclick="window.history.back()" class="pink-btn">Retour</button>
+  </nav>
+  <div id="mainGallery">
+    <div class="gallery-container">
+      <section class="photo-section">
+        <div class="photo-frame">
+          <img id="carousel" src="/images/1.jpeg" alt="photo" />
+        </div>
+      </section>
+      <!-- ...existing code... (poem-section removed, poem now in banner) -->
+    </div>
+  </div>
+  <div id="poemModal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(255,240,246,0.98);z-index:2000;overflow:auto;">
+    <div style="max-width:600px;margin:60px auto;background:#fff;border-radius:16px;padding:32px;color:#801336;box-shadow:0 8px 32px rgba(0,0,0,0.08);">
+      <h2 style="margin-top:0;">Poème</h2>
+      <div class="poem-text">
+        <p>Winnie, ma princesse au rire étincelant,<br>
+        Toujours joueuse, légère comme le vent,<br>
+        Tu transformes l’instant en éclats de lumière,<br>
         Et mon monde s’illumine dès que tu ris, sincère.</p>
 
-        <p>Ton sourire, miracle aux reflets dorés,
-        Pourrait réveiller les cœurs les plus brisés ;
-        Il porte une chaleur plus forte que l’oubli,
+        <p>Ton sourire, miracle aux reflets dorés,<br>
+        Pourrait réveiller les cœurs les plus brisés ;<br>
+        Il porte une chaleur plus forte que l’oubli,<br>
         Comme un soleil levant après la nuit.</p>
 
-        <p>Ton regard, profond comme un océan paisible,
-        Devant lui, mentir serait impossible ;
-        Il rassure, enveloppe d’une douceur rare,
+        <p>Ton regard, profond comme un océan paisible,<br>
+        Devant lui, mentir serait impossible ;<br>
+        Il rassure, enveloppe d’une douceur rare,<br>
         Et apaise l’âme quand elle s’égare.</p>
 
-        <p>Et moi, soldat pourtant solide et assuré,
-        Je vacille dès que tu viens me troubler ;
-        Ta grâce me guide, m’emporte et me surprend,
+        <p>Et moi, soldat pourtant solide et assuré,<br>
+        Je vacille dès que tu viens me troubler ;<br>
+        Ta grâce me guide, m’emporte et me surprend,<br>
         Car ton amour est ma force… et mon serment.</p>
       </div>
-    </aside>
+      <button onclick="document.getElementById('poemModal').style.display='none'" class="pink-btn" style="margin-top:24px;">Fermer</button>
+    </div>
+  </div>
+  <div id="surpriseModal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(255,228,225,0.98);z-index:2100;overflow:auto;">
+    <div style="max-width:1100px;min-height:600px;display:flex;flex-direction:row;align-items:center;justify-content:center;margin:60px auto;background:#fff;border-radius:24px;padding:48px 32px;color:#801336;box-shadow:0 8px 32px rgba(0,0,0,0.08);position:relative;gap:48px;">
+      <div id="surprisePoem" style="flex:1;opacity:0;transition:opacity 1.5s;font-size:1.15em;max-width:350px;">
+        <h2 style="margin-top:0;">Poème</h2>
+        <div class="poem-text" id="poemTextAnim"></div>
+      </div>
+      <div id="surpriseTreeZone" style="flex:2;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:350px;min-height:400px;">
+        <h2 style="margin-top:0;">Un message romantique</h2>
+        <p>Tu es la lumière de ma vie, mon bonheur quotidien. Je t'aime plus que tout !</p>
+        <div id="growingTree" style="position:relative;width:260px;height:340px;">
+          <svg id="treeSVG" width="300" height="360" style="display:block;"></svg>
+        </div>
+        <div class="counter" style="margin-top:24px;font-size:18px;font-weight:bold;">
+          Notre amour dure depuis...<br>
+          <span id="timerSurpriseModal"></span>
+        </div>
+        <div id="surpriseHeartsModal" style="position:relative;height:120px;margin-top:16px;"></div>
+        <button onclick="closeSurprise()" class="pink-btn" style="margin-top:32px;">Fermer</button>
+      </div>
+    </div>
   </div>
   <script src="/js/gallery.js"></script>
+    <script type="module" src="/js/treeAnimation.js"></script>
+  <script type="module">
+import { startTreeAnimation } from '/js/treeAnimation.js';
+const startDate = new Date("2025-02-24T00:00:00");
+// Navbar
+document.getElementById('poemNavBtn').onclick = function(){
+  document.getElementById('poemModal').style.display = 'block';
+};
+document.getElementById('surpriseNavBtn').onclick = function(){
+  window.location.href = '/Flower-animation-main/FLORES.html';
+};
+window.closeSurprise = function(){
+  document.getElementById('surpriseModal').style.display = 'none';
+  document.getElementById('mainGallery').style.display = 'block';
+  if(window.surpriseTimerInterval) clearInterval(window.surpriseTimerInterval);
+  if(window.surpriseHeartsInterval) clearInterval(window.surpriseHeartsInterval);
+  document.getElementById("surpriseHeartsModal").innerHTML = "";
+};
+  </script>
+  </script>
+  </script>
 </body>
 </html>

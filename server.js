@@ -8,9 +8,10 @@ app.use(express.json());
 
 const path = require("path");
 
-// Servir les fichiers statiques publics et le dossier d'images
+// Servir les fichiers statiques publics, le dossier d'images et Flower-animation-main
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/images", express.static(path.join(__dirname, "images")));
+app.use("/Flower-animation-main", express.static(path.join(__dirname, "Flower-animation-main")));
 
 // Database connection removed — not needed for this project.
 // (Previously used mysql2 / MariaDB; DB code was removed per request.)
