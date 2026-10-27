@@ -1,52 +1,70 @@
-document.addEventListener('DOMContentLoaded', ()=>{
-  const img = document.getElementById('carousel');
-  const frame = document.querySelector('.photo-frame');
-  const total = 8; // images 1..8
-  let i = 1;
-  const effects = ['fade','zoom','slide-left','slide-right'];
+document.addEventListener('DOMContentLoaded', () => {
+  const image = document.getElementById('carousel');
+  const count = document.getElementById('photoCount');
+  const dots = document.getElementById('photoDots');
+  const previousButton = document.getElementById('previousPhoto');
+  const nextButton = document.getElementById('nextPhoto');
+  const backButton = document.getElementById('backButton');
+  const relationshipTimer = document.getElementById('relationshipTimer');
+  const totalPhotos = 8;
+  const photos = Array.from({ length: totalPhotos }, (_, index) => `/images/${index + 1}.jpeg`);
+  let currentPhoto = 0;
+  let transitionTimeout;
 
-  // initial reflection
-  frame.style.setProperty('--reflection', `url(${img.src})`);
+  function displayPhoto(index) {
+    currentPhoto = (index + totalPhotos) % totalPhotos;
+    image.classList.add('is-changing');
+    window.clearTimeout(transitionTimeout);
 
-  function removeEffectClasses(){
-    effects.forEach(e => {
-      img.classList.remove(`${e}-out`);
-      img.classList.remove(`${e}-in`);
-      frame.classList.remove(`${e}-out`);
-      frame.classList.remove(`${e}-in`);
-    });
+    transitionTimeout = window.setTimeout(() => {
+      image.src = photos[currentPhoto];
+      image.alt = `Souvenir ${currentPhoto + 1} sur ${totalPhotos}`;
+      count.textContent = `${String(currentPhoto + 1).padStart(2, '0')} / ${String(totalPhotos).padStart(2, '0')}`;
+      dots.querySelectorAll('button').forEach((dot, dotIndex) => {
+        dot.classList.toggle('is-active', dotIndex === currentPhoto);
+        dot.setAttribute('aria-current', dotIndex === currentPhoto ? 'true' : 'false');
+      });
+      image.classList.remove('is-changing');
+    }, 220);
   }
 
-  function show(n){
-    const effect = effects[Math.floor(Math.random()*effects.length)];
-    removeEffectClasses();
-    // out
-    img.classList.add(`${effect}-out`);
-    frame.classList.add(`${effect}-out`);
+  photos.forEach((_, index) => {
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.className = 'photo-dot';
+    dot.setAttribute('aria-label', `Afficher la photo ${index + 1}`);
+    dot.addEventListener('click', () => displayPhoto(index));
+    dots.appendChild(dot);
+  });
+  displayPhoto(currentPhoto);
 
-    setTimeout(()=>{
-      // change source
-      img.src = `/images/${n}.jpeg`;
-      // update reflection to the new image
-      frame.style.setProperty('--reflection', `url('/images/${n}.jpeg')`);
-      // force reflow
-      void img.offsetWidth;
-      // in
-      img.classList.remove(`${effect}-out`);
-      img.classList.add(`${effect}-in`);
-      frame.classList.remove(`${effect}-out`);
-      frame.classList.add(`${effect}-in`);
-    }, 600);
+  previousButton.addEventListener('click', () => displayPhoto(currentPhoto - 1));
+  nextButton.addEventListener('click', () => displayPhoto(currentPhoto + 1));
+  window.setInterval(() => displayPhoto(currentPhoto + 1), 5000);
 
-    // cleanup after transition
-    setTimeout(()=>{
-      removeEffectClasses();
-    }, 1400);
+  backButton.addEventListener('click', () => {
+    if (window.history.length > 1) {
+      window.history.back();
+    } else {
+      window.location.assign('/');
+    }
+  });
+
+  const relationshipStart = new Date(2025, 1, 24);
+  const second = 1000;
+  const minute = second * 60;
+  const hour = minute * 60;
+  const day = hour * 24;
+
+  function updateRelationshipTimer() {
+    const elapsed = Math.max(0, Date.now() - relationshipStart.getTime());
+    const days = Math.floor(elapsed / day);
+    const hours = Math.floor((elapsed % day) / hour);
+    const minutes = Math.floor((elapsed % hour) / minute);
+    const seconds = Math.floor((elapsed % minute) / second);
+    relationshipTimer.textContent = `${days} jours, ${hours} h, ${minutes} min et ${seconds} s`;
   }
 
-  // start cycle
-  setInterval(()=>{
-    i = i % total + 1;
-    show(i);
-  }, 4000);
+  updateRelationshipTimer();
+  window.setInterval(updateRelationshipTimer, second);
 });

@@ -2,114 +2,154 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Galerie</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fffaf5">
+  <meta name="description" content="Nos souvenirs, un poème et une surprise réunis sur une seule page.">
+  <title>Winnie & moi — Nos souvenirs</title>
   <link rel="stylesheet" href="/css/style.css">
-
-  <style>
-    body {
-      margin: 0;
-    }
-
-    /* NAVBAR */
-    nav {
-      position: sticky;
-      top: 0;
-      width: 100%;
-      background: rgba(255,240,246,0.95);
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      padding: 15px 0;
-      z-index: 9999;
-      backdrop-filter: blur(6px);
-      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-    }
-
-    .pink-btn {
-      background: linear-gradient(90deg,#ffb6d5 0%,#ff69b4 100%);
-      color: white;
-      font-weight: bold;
-      border: none;
-      border-radius: 10px;
-      padding: 10px 28px;
-      cursor: pointer;
-      transition: 0.3s;
-      box-shadow: 0 4px 18px #ff69b455;
-    }
-
-    .pink-btn:hover {
-      transform: scale(1.07);
-      box-shadow: 0 6px 24px #ff69b488;
-    }
-
-    /* Poème arrière-plan */
-    #poem-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.15;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: 'Brush Script MT', cursive;
-      font-size: 2em;
-      text-align: center;
-      white-space: pre-line;
-    }
-  </style>
 </head>
 
-<body>
+<body class="gallery-page">
+  <header class="gallery-header">
+    <a class="gallery-brand" href="#accueil" aria-label="Retour en haut de page">
+      <span class="brand-mark" aria-hidden="true">W</span>
+      <span>Winnie <span class="brand-ampersand">&</span> moi</span>
+    </a>
 
-  <!-- Navbar -->
-  <nav>
-    <button id="poemNavBtn" class="pink-btn">Poème</button>
-    <button id="surpriseNavBtn" class="pink-btn">Surprise</button>
-    <button onclick="window.history.back()" class="pink-btn">Retour</button>
-  </nav>
+    <nav class="gallery-nav" aria-label="Navigation principale">
+      <a href="#souvenirs">Souvenirs</a>
+      <a href="#poeme">Le poème</a>
+      <a href="#surprise">La surprise</a>
+      <button id="backButton" class="nav-back" type="button">Retour</button>
+    </nav>
+  </header>
 
-  <!-- Poème en arrière-plan -->
-  <div id="poem-bg">
-    Winnie, ma princesse au rire étincelant,
-    Toujours joueuse, légère comme le vent...
-  </div>
-
-  <!-- Galerie -->
-  <div id="mainGallery">
-    <div class="gallery-container">
-      <section class="photo-section">
-        <div class="photo-frame">
-          <img id="carousel" src="/images/1.jpeg" alt="photo">
+  <main>
+    <section class="gallery-hero" id="accueil">
+      <div class="hero-copy">
+        <p class="eyebrow"><span aria-hidden="true">✦</span> Un petit monde rien qu’à nous</p>
+        <h1>Winnie, ma princesse <span>au rire étincelant.</span></h1>
+        <p class="hero-description">
+          Des instants précieux, quelques mots doux et une surprise fleurie :
+          tout ce que j’aime partager avec toi, réuni ici.
+        </p>
+        <div class="hero-actions">
+          <a class="gallery-button button-primary" href="#souvenirs">Découvrir nos souvenirs <span aria-hidden="true">→</span></a>
+          <a class="gallery-button button-secondary" href="#poeme">Lire le poème</a>
         </div>
-      </section>
-    </div>
-  </div>
+        <p class="hero-note"><span aria-hidden="true">♡</span> Fait avec amour, juste pour toi</p>
+      </div>
 
-  <!-- Modal Poème -->
-  <div id="poemModal" style="display:none;position:fixed;inset:0;background:rgba(255,240,246,0.98);z-index:10000;">
-    <div style="max-width:600px;margin:80px auto;background:#fff;padding:30px;border-radius:16px;">
-      <h2>Poème</h2>
-      <p>Winnie, ma princesse au rire étincelant...</p>
-      <button onclick="document.getElementById('poemModal').style.display='none'" class="pink-btn">
-        Fermer
-      </button>
-    </div>
-  </div>
+      <div class="hero-visual" aria-label="Un de nos souvenirs en photo">
+        <div class="hero-photo">
+          <img src="/images/1.jpeg" alt="Un joli souvenir de nous">
+        </div>
+        <div class="hero-photo-caption">
+          <span class="caption-heart" aria-hidden="true">♥</span>
+          <span><strong>Nos plus beaux moments</strong><small>Une histoire qui nous ressemble</small></span>
+        </div>
+        <span class="hero-sparkle sparkle-one" aria-hidden="true">✳</span>
+        <span class="hero-sparkle sparkle-two" aria-hidden="true">✦</span>
+      </div>
 
-  <script type="module">
-    document.getElementById('poemNavBtn').onclick = function(){
-      document.getElementById('poemModal').style.display = 'block';
-    };
+      <a class="scroll-cue" href="#souvenirs"><span>Faire défiler</span><span aria-hidden="true">↓</span></a>
+    </section>
 
-    document.getElementById('surpriseNavBtn').onclick = function(){
-      window.location.href = '/Flower-animation-main/FLORES.html';
-    };
-  </script>
+    <section class="memories-section page-section" id="souvenirs">
+      <div class="section-heading">
+        <p class="eyebrow">Notre album</p>
+        <h2>Des souvenirs à <span>garder près du cœur.</span></h2>
+        <p>Chaque photo raconte un petit bout de notre belle histoire.</p>
+      </div>
 
+      <div class="memory-card">
+        <div class="memory-photo-wrap">
+          <div class="photo-frame">
+            <img id="carousel" src="/images/1.jpeg" alt="Souvenir 1 sur 8">
+          </div>
+          <span class="photo-decoration photo-decoration-top" aria-hidden="true">✿</span>
+          <span class="photo-decoration photo-decoration-bottom" aria-hidden="true">♡</span>
+        </div>
+        <div class="memory-caption">
+          <p class="memory-kicker">Un instant, une émotion</p>
+          <h3>Et si on revivait ce moment ?</h3>
+          <p class="memory-support">Laisse défiler les photos ou choisis celle qui te fait sourire.</p>
+          <div class="carousel-controls" aria-label="Commandes de la galerie">
+            <button id="previousPhoto" class="carousel-arrow" type="button" aria-label="Photo précédente">←</button>
+            <span id="photoCount" class="photo-count" aria-live="polite">01 <span>/</span> 08</span>
+            <button id="nextPhoto" class="carousel-arrow" type="button" aria-label="Photo suivante">→</button>
+          </div>
+          <div id="photoDots" class="photo-dots" aria-label="Choisir une photo"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="poem-section page-section" id="poeme">
+      <div class="poem-intro">
+        <p class="eyebrow">Quelques mots pour toi</p>
+        <h2>Parce que tu rends <span>chaque jour plus beau.</span></h2>
+        <p>Un petit poème, écrit avec tout mon cœur.</p>
+        <a class="text-link" href="#surprise">Et maintenant, la surprise <span aria-hidden="true">→</span></a>
+      </div>
+      <article class="poem-card">
+        <span class="poem-quote" aria-hidden="true">“</span>
+        <p>
+          Winnie, ma princesse au rire étincelant,<br>
+          Ton sourire rend plus doux chaque instant.<br>
+          Dans chacun de nos souvenirs,<br>
+          Je trouve mille raisons de sourire.<br><br>
+          Que nos jours continuent de fleurir,<br>
+          Et nos cœurs, toujours, de se réjouir.
+        </p>
+        <span class="poem-signature">Avec tout mon amour <span aria-hidden="true">♡</span></span>
+      </article>
+    </section>
+
+    <section class="surprise-section page-section" id="surprise">
+      <div class="surprise-copy">
+        <p class="eyebrow">Une petite surprise</p>
+        <h2>Pour toi, <span>ma plus jolie fleur.</span></h2>
+        <p>
+          Comme ces fleurs qui s’épanouissent, mon bonheur grandit chaque jour
+          à tes côtés. Voici un petit jardin rien que pour toi.
+        </p>
+        <div class="love-counter">
+          <span class="counter-label">Et notre histoire dure depuis…</span>
+          <strong id="relationshipTimer" aria-live="off">Je calcule…</strong>
+        </div>
+        <a class="gallery-button button-light" href="#accueil">Revoir nos souvenirs <span aria-hidden="true">↑</span></a>
+      </div>
+      <div class="surprise-garden" role="img" aria-label="Un bouquet de fleurs animé">
+        <span class="garden-glow" aria-hidden="true"></span>
+        <div class="bouquet-flower flower-back" aria-hidden="true">
+          <div class="flower-head">
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <i></i>
+          </div>
+          <div class="flower-stem"><i></i><b></b></div>
+        </div>
+        <div class="bouquet-flower flower-front" aria-hidden="true">
+          <div class="flower-head">
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <i></i>
+          </div>
+          <div class="flower-stem"><i></i><b></b></div>
+        </div>
+        <span class="garden-heart heart-one" aria-hidden="true">♥</span>
+        <span class="garden-heart heart-two" aria-hidden="true">♥</span>
+        <span class="garden-star star-one" aria-hidden="true">✦</span>
+        <span class="garden-star star-two" aria-hidden="true">✧</span>
+      </div>
+    </section>
+  </main>
+
+  <footer class="gallery-footer">
+    <a class="gallery-brand" href="#accueil"><span class="brand-mark" aria-hidden="true">W</span><span>Winnie <span class="brand-ampersand">&</span> moi</span></a>
+    <p>Une page remplie de tendresse <span aria-hidden="true">♡</span></p>
+  </footer>
+
+  <script src="/js/gallery.js"></script>
 </body>
 </html>
