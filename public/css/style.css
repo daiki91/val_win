@@ -796,161 +796,95 @@ html:has(body.gallery-page) {
 
 .surprise-garden {
   position: relative;
+  display: flex;
   min-height: 390px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
+  gap: 14px;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 50% 50% 18px 18px;
   background:
     radial-gradient(ellipse at 50% 85%, rgba(244, 198, 155, 0.17), transparent 50%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.015));
+  color: #fff8f1;
+  text-align: center;
+  text-decoration: none;
+  transition: transform 200ms ease, border-color 200ms ease, background 200ms ease;
 }
 
-.garden-glow {
+.surprise-garden:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 226, 189, 0.45);
+  background:
+    radial-gradient(ellipse at 50% 85%, rgba(244, 198, 155, 0.24), transparent 50%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.035));
+}
+
+.surprise-card-glow {
   position: absolute;
-  top: 22%;
+  top: 20%;
   left: 50%;
-  width: 190px;
-  height: 190px;
+  width: 170px;
+  height: 170px;
   border-radius: 50%;
-  background: rgba(255, 211, 147, 0.15);
+  background: rgba(255, 211, 147, 0.16);
   filter: blur(42px);
   transform: translateX(-50%);
 }
 
-.bouquet-flower {
+.surprise-flower-icon {
+  position: relative;
+  width: 78px;
+  height: 78px;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 18px rgba(255, 216, 159, 0.25));
+}
+
+.surprise-card-eyebrow,
+.surprise-card-title,
+.surprise-card-cta {
+  position: relative;
+  display: block;
+}
+
+.surprise-card-eyebrow {
+  color: #e9c89d;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.surprise-card-title {
+  color: #fff8f1;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  line-height: 1.17;
+}
+
+.surprise-card-cta {
+  margin-top: 7px;
+  padding: 11px 17px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.09);
+  color: #fff;
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.surprise-card-cta span {
+  margin-left: 8px;
+}
+
+.surprise-card-heart {
   position: absolute;
-  bottom: 30px;
-  width: 150px;
-  height: 295px;
-  transform-origin: bottom center;
-}
-
-.flower-back {
-  left: 24%;
-  transform: scale(0.78) rotate(-13deg);
-}
-
-.flower-front {
-  right: 23%;
-  transform: scale(0.92) rotate(10deg);
-}
-
-.flower-head {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 150px;
-  height: 140px;
-  animation: flower-sway 4.5s ease-in-out infinite alternate;
-  transform-origin: 50% 100%;
-}
-
-.flower-back .flower-head {
-  animation-delay: -1.7s;
-}
-
-.flower-head span {
-  position: absolute;
-  top: 19px;
-  left: 57px;
-  width: 37px;
-  height: 58px;
-  border-radius: 55% 55% 45% 45%;
-  background: linear-gradient(180deg, #f8d7c6, #dd9fa4);
-  box-shadow: inset 0 2px 6px rgba(255, 255, 255, 0.25);
-  transform-origin: 50% 51px;
-}
-
-.flower-head span:nth-child(2) { transform: rotate(45deg); }
-.flower-head span:nth-child(3) { transform: rotate(90deg); }
-.flower-head span:nth-child(4) { transform: rotate(135deg); }
-.flower-head span:nth-child(5) { transform: rotate(180deg); }
-.flower-head span:nth-child(6) { transform: rotate(225deg); }
-.flower-head span:nth-child(7) { transform: rotate(270deg); }
-.flower-head span:nth-child(8) { transform: rotate(315deg); }
-
-.flower-head > i {
-  position: absolute;
-  top: 55px;
-  left: 64px;
-  width: 24px;
-  height: 24px;
-  border: 4px solid rgba(255, 241, 195, 0.55);
-  border-radius: 50%;
-  background: #e9b86e;
-  box-shadow: 0 0 24px rgba(255, 203, 125, 0.55);
-}
-
-.flower-stem {
-  position: absolute;
-  top: 112px;
-  left: 71px;
-  width: 8px;
-  height: 180px;
-  border-radius: 8px;
-  background: linear-gradient(90deg, #4f765b, #9fb77c, #51775d);
-  transform: rotate(3deg);
-}
-
-.flower-stem i,
-.flower-stem b {
-  position: absolute;
-  width: 47px;
-  height: 24px;
-  border-radius: 100% 0 100% 0;
-  background: linear-gradient(145deg, #abc58a, #5c8664);
-}
-
-.flower-stem i {
-  top: 54px;
-  left: 3px;
-  transform: rotate(-17deg);
-}
-
-.flower-stem b {
-  top: 104px;
-  right: 3px;
-  transform: scaleX(-1) rotate(-17deg);
-}
-
-.garden-heart,
-.garden-star {
-  position: absolute;
+  top: 20%;
+  right: 18%;
   color: #f4c3b4;
-}
-
-.garden-heart {
-  animation: heart-float 3s ease-in-out infinite;
-}
-
-.heart-one {
-  top: 27%;
-  left: 20%;
-  font-size: 1.3rem;
-}
-
-.heart-two {
-  top: 18%;
-  right: 19%;
-  animation-delay: -1.4s;
-  color: #e4a4b0;
-  font-size: 0.9rem;
-}
-
-.garden-star {
-  color: #f1d2a4;
-}
-
-.star-one {
-  top: 15%;
-  left: 36%;
-  font-size: 1.5rem;
-}
-
-.star-two {
-  top: 38%;
-  right: 14%;
-  font-size: 1.3rem;
+  font-size: 1.4rem;
 }
 
 .gallery-footer {
@@ -981,16 +915,6 @@ html:has(body.gallery-page) {
 
 .gallery-footer p span {
   color: #c77b91;
-}
-
-@keyframes flower-sway {
-  from { transform: rotate(-3deg); }
-  to { transform: rotate(4deg); }
-}
-
-@keyframes heart-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-12px); }
 }
 
 @media (max-width: 900px) {
@@ -1112,14 +1036,6 @@ html:has(body.gallery-page) {
 
   .surprise-garden {
     min-height: 350px;
-  }
-
-  .flower-back {
-    left: 15%;
-  }
-
-  .flower-front {
-    right: 13%;
   }
 
   .gallery-footer {
