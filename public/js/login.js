@@ -3,33 +3,22 @@ document.addEventListener('DOMContentLoaded', () => {
   const input = document.getElementById('password');
   const msg = document.getElementById('msg');
 
-  function getAttempts(){
-    return parseInt(sessionStorage.getItem('pwAttempts') || '0', 10);
-  }
-  function setAttempts(n){
-    sessionStorage.setItem('pwAttempts', String(n));
-  }
+  let attempts = 0;
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const v = input.value.trim();
     if (v === 'princess') {
-      sessionStorage.removeItem('pwAttempts');
-      window.location = '/ask';
+      window.location.assign('/gallery');
       return;
     }
 
-    // incorrect
-    let attempts = getAttempts() + 1;
-    setAttempts(attempts);
+    attempts += 1;
 
     if (attempts === 1) {
-      msg.textContent = 'comment ça tu ne trouves pas ?';
-    } else if (attempts === 2) {
-      msg.textContent = 'Rappelle-toi bien du surnom que je te répète à chaque fois.';
+      msg.textContent = 'Ce n’est pas encore le bon mot… essaie encore ♡';
     } else {
-      // After 2 attempts continue to show the hint
-      msg.textContent = 'Rappelle-toi bien du surnom que je te répète à chaque fois.';
+      msg.textContent = 'Pense au surnom que je te répète souvent ♡';
     }
 
     input.value = '';

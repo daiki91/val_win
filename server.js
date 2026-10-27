@@ -26,7 +26,7 @@ app.get("/login", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 app.get("/ask", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "ask.html"));
+  res.redirect(302, "/gallery");
 });
 app.get("/gallery", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "gallery.html"));
